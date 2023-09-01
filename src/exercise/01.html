@@ -10,7 +10,9 @@
 <body>
   <div id="root">
     <script type="module">
+      const root = document.createElement('div');
       const div = document.createElement('div');
+      root.setAttribute('id', "root");
       div.textContent = 'Hello World';
       div.className = 'container';
       document.getElementById('root').append(div);
