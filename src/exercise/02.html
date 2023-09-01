@@ -27,8 +27,8 @@
     // 🐨 Please re-implement the regular document.createElement code above
     const elementProps = {
       className: 'containers', children: [
-        React.createElement('span', { key: 'span1' }, 'Hello'), ' ',
-        React.createElement('span', { key: 'span2' }, 'World'),
+        React.createElement('span', null, 'Hello'), ' ',
+        React.createElement('span', null, 'World'),
       ]
     };
     const reactElement = React.createElement('div', elementProps);
