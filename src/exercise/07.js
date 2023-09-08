@@ -1,7 +1,7 @@
 // Rendering Lists
 // http://localhost:3000/isolated/exercise/07.js
 
-import * as React from 'react'
+import React, {useRef, useEffect} from 'react'
 
 const allItems = [
   {id: 'apple', value: '🍎 apple'},
@@ -12,10 +12,25 @@ const allItems = [
 
 function App() {
   const [items, setItems] = React.useState(allItems)
+  const inputRef = useRef()
+
+  useEffect(() => {
+    inputRef.current.focus()
+    console.dir(inputRef.current)
+  }, [])
 
   function addItem() {
     const itemIds = items.map(i => i.id)
-    setItems([...items, allItems.find(i => !itemIds.includes(i.id))])
+    const nextItem = allItems.find(i => !itemIds.includes(i.id))
+
+    if (nextItem) {
+      const nextItemIndex = allItems.findIndex(i => i.id === nextItem.id)
+      setItems([
+        ...items.slice(0, nextItemIndex),
+        nextItem,
+        ...items.slice(nextItemIndex),
+      ])
+    }
   }
 
   function removeItem(item) {
@@ -30,10 +45,14 @@ function App() {
       <ul>
         {items.map(item => (
           // 🐨 add a key prop to the <li> below. Set it to item.id
-          <li>
+          <li key={item.id}>
             <button onClick={() => removeItem(item)}>remove</button>{' '}
             <label htmlFor={`${item.id}-input`}>{item.value}</label>{' '}
-            <input id={`${item.id}-input`} defaultValue={item.value} />
+            <input
+              id={`${item.id}-input`}
+              defaultValue={item.value}
+              ref={inputRef}
+            />
           </li>
         ))}
       </ul>
