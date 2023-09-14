@@ -4,9 +4,8 @@
 import * as React from 'react'
 
 function UsernameForm({onSubmitUsername}) {
-  // 🐨 add a submit event handler here (`handleSubmit`).
-  const usernameInputRef = React.useRef(null)
   const [username, setUsername] = React.useState('')
+
   function handleSubmit(event) {
     event.preventDefault()
     onSubmitUsername(username)
@@ -17,8 +16,6 @@ function UsernameForm({onSubmitUsername}) {
     setUsername(value.toLowerCase())
   }
 
-  // 🐨 make sure to associate the label to the input.
-  // to do so, set the value of 'htmlFor' prop of the label to the id of input
   return (
     <form onSubmit={handleSubmit}>
       <div>
